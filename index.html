@@ -16,12 +16,25 @@
       rel="stylesheet"
     />
 
+    <!-- On page load or when changing themes, best to add inline in `head` to avoid FOUC -->
+    <script>
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+
     <!-- 🌙 ☀️ -->
   </head>
-  <body class="font-body font-medium bg-gray-50">
+  <body class="font-body font-medium bg-gray-50 dark:bg-gray-900">
     <!-- ===== HEADER SECTION ===== -->
     <header
-      class="header fixed w-full top-0 left-0 bg-gray-50 z-50 transition-all duration-300"
+      class="header fixed w-full top-0 left-0 bg-gray-50 z-50 transition-all duration-300 dark:bg-gray-900"
       id="header"
     >
       <div
@@ -29,7 +42,7 @@
       >
         <a
           href="#"
-          class="header__logo inline-flex items-center gap-2 text-[18px] text-gray-900 font-bold"
+          class="header__logo inline-flex items-center gap-2 text-[18px] text-gray-900 font-bold dark:text-white"
         >
           <img src="./src/img/icon.svg" alt="" class="header__logo-icon" />
           FLEX.
@@ -61,7 +74,12 @@
             class="header__theme absolute top-6 right-6 text-[1.5rem] cursor-pointer md:static"
             id="theme-toggle"
           >
-            <span class="header__theme-icon" id="themeToggleDarkIcon">🌙</span>
+            <span class="header__theme-icon hidden" id="themeToggleDarkIcon"
+              >🌙</span
+            >
+            <span class="header__theme-icon hidden" id="themeToggleLightIcon"
+              >☀️</span
+            >
           </div>
 
           <a href="#" class="header__button button mt-6 md:mt-0"
@@ -70,7 +88,7 @@
         </div>
 
         <div
-          class="header__toggle inline-flex text-[1.5rem] text-gray-900 cursor-pointer md:hidden"
+          class="header__toggle inline-flex text-[1.5rem] text-gray-900 cursor-pointer md:hidden dark:text-white"
           id="header-toggle"
         >
           <i class="bx bx-grid-alt"></i>
@@ -109,7 +127,7 @@
               <a href="#" class="home__buttons-demo button">Request a Demo</a>
               <a
                 href="#"
-                class="home__buttons-demo button bg-transparent ring-2 ring-gray-300 text-gray-900"
+                class="home__buttons-demo button bg-transparent ring-2 ring-gray-300 text-gray-900 dark:text-white"
                 >Sign Up</a
               >
             </div>
